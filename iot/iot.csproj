@@ -28,7 +28,6 @@
     <Folder Include="Config\" />
     <Folder Include="Images\" />
     <Folder Include="Logs\" />
-    <Folder Include="Managers\" />
     <Folder Include="Resources\" />
   </ItemGroup>
 

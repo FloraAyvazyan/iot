@@ -1,4 +1,5 @@
-﻿using iot.Services;
+﻿using iot.Managers; // ⬅️ ეს ხაზი დაამატე
+using iot.Services;
 using SmartRoomMonitor.Services;
 
 namespace iot.Utilities
@@ -12,9 +13,10 @@ namespace iot.Utilities
         public static UserService Users { get; private set; }
         public static AuthenticationService Auth { get; private set; }
 
-        // სხვა სერვისები მოგვიანებით დაემატება (LightController, SensorSimulationService და ა.შ.)
-        //public static LightController Light { get; private set; }
-        //public static SensorSimulationService Sensor { get; private set; }
+        public static SensorSimulationService Sensor { get; private set; }
+        public static LightController Light { get; private set; }
+
+        public static CountdownManager Countdown { get; private set; } // ⬅️ ეს დავამატეთ
 
         public static void Initialize()
         {
@@ -25,10 +27,12 @@ namespace iot.Utilities
             Users = new UserService(Json);
             Auth = new AuthenticationService(Users, Logger, History);
 
-            // Light და Sensor მოგვიანებით შეიქმნება (ნაწილი 3-4)
+            Sensor = new SensorSimulationService();
+            Light = new LightController();
+
+            Countdown = new CountdownManager(); // ⬅️ ეს დავამატეთ
         }
 
-        // ხელახლა ჩატვირთვა (თუ საჭიროა)
         public static void ReloadAll()
         {
             Users.Reload();
