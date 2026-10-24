@@ -1,0 +1,22 @@
+using System;
+using System.Windows.Forms;
+using iot.Forms;
+using iot.Utilities;
+
+namespace iot
+{
+    internal static class Program
+    {
+        [STAThread]
+        static void Main()
+        {
+            ApplicationConfiguration.Initialize();
+
+            // ?????????? ?????????????
+            AppServices.Initialize();
+
+            // ?????????? ?????? Login ??????
+            Application.Run(new LoginForm());
+        }
+    }
+}
