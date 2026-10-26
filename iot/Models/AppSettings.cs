@@ -7,5 +7,6 @@
         public bool NotificationsEnabled { get; set; } = true;
         public string LastLoggedInUser { get; set; } = string.Empty;
         public bool RememberLastUser { get; set; } = false;
+        public bool IsDarkMode { get; set; } = false;
     }
 }

@@ -15,13 +15,13 @@ namespace iot.Forms
         {
             lblError.Text = string.Empty;
 
-            // თუ Remember Me ჩართულია წინა სესიიდან, შევავსოთ
+            // ⬇️ აქ პროგრამა ამოწმებს settings.json-ს, ხომ არ არის იუზერი დამახსოვრებული
             var settings = AppServices.Settings.Current;
             if (settings.RememberLastUser && !string.IsNullOrWhiteSpace(settings.LastLoggedInUser))
             {
                 txtUsername.Text = settings.LastLoggedInUser;
                 chkRemember.Checked = true;
-                txtPassword.Focus();
+                txtPassword.Focus(); // კურსორი გადადის პაროლის ველზე
             }
             else
             {
@@ -32,10 +32,10 @@ namespace iot.Forms
         private void btnLogin_Click(object sender, EventArgs e)
         {
             lblError.Text = string.Empty;
-
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text;
 
+            // ავტორიზაცია
             bool success = AppServices.Auth.Login(username, password, chkRemember.Checked, out string error);
 
             if (!success)
@@ -44,7 +44,7 @@ namespace iot.Forms
                 return;
             }
 
-            // Remember Me შენახვა
+            // ⬇️ თუ წარმატებით შემოვიდა, ვინახავთ settings.json-ში, რომ შემდეგ ჯერზე გაიხსენოს
             var settings = AppServices.Settings.Current;
             settings.RememberLastUser = chkRemember.Checked;
             settings.LastLoggedInUser = chkRemember.Checked ? username : string.Empty;

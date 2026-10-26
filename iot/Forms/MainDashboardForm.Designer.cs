@@ -45,15 +45,16 @@
             btnSettings = new Button();
             btnHistory = new Button();
             btnLogs = new Button();
+            btnDarkMode = new Button();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // btnLogout
             // 
-            btnLogout.Location = new Point(260, 542);
+            btnLogout.Location = new Point(215, 541);
             btnLogout.Margin = new Padding(4);
             btnLogout.Name = "btnLogout";
-            btnLogout.Size = new Size(120, 37);
+            btnLogout.Size = new Size(150, 37);
             btnLogout.TabIndex = 0;
             btnLogout.Text = "Logout";
             btnLogout.UseVisualStyleBackColor = true;
@@ -230,12 +231,27 @@
             btnLogs.UseVisualStyleBackColor = false;
             btnLogs.Click += btnLogs_Click;
             // 
+            // btnDarkMode
+            // 
+            btnDarkMode.BackColor = Color.FromArgb(52, 73, 94);
+            btnDarkMode.Cursor = Cursors.Hand;
+            btnDarkMode.FlatStyle = FlatStyle.Flat;
+            btnDarkMode.ForeColor = Color.White;
+            btnDarkMode.Location = new Point(215, 447);
+            btnDarkMode.Name = "btnDarkMode";
+            btnDarkMode.Size = new Size(150, 40);
+            btnDarkMode.TabIndex = 7;
+            btnDarkMode.Text = "Toggle Dark Mode";
+            btnDarkMode.UseVisualStyleBackColor = false;
+            btnDarkMode.Click += btnDarkMode_Click;
+            // 
             // MainDashboardForm
             // 
             AutoScaleDimensions = new SizeF(12F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(236, 240, 241);
             ClientSize = new Size(408, 595);
+            Controls.Add(btnDarkMode);
             Controls.Add(btnLogs);
             Controls.Add(btnHistory);
             Controls.Add(btnSettings);
@@ -274,5 +290,6 @@
         private Button btnSettings;
         private Button btnHistory;
         private Button btnLogs;
+        private Button btnDarkMode;
     }
 }

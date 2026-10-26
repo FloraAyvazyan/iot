@@ -18,6 +18,7 @@ namespace iot.Forms
             AppServices.Countdown.OnFinished += Countdown_OnFinished;
 
             UpdateUI();
+            ApplyTheme(); // ⬅️ ეს დაამატე, რომ პროგრამა გახსნისას თემა გაიხსენოს
             uiTimer.Start();
         }
 
@@ -170,6 +171,69 @@ namespace iot.Forms
         private void MainDashboardForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void btnDarkMode_Click(object sender, EventArgs e)
+        {
+            // ვაბრუნებთ პარამეტრს (თუ იყო true, გახდება false და პირიქით)
+            var settings = AppServices.Settings.Current;
+            settings.IsDarkMode = !settings.IsDarkMode;
+            AppServices.Settings.Save(settings);
+
+            // ვიძახებთ თემის განახლების მეთოდს
+            ApplyTheme();
+        }
+
+        private void ApplyTheme()
+        {
+            bool isDark = AppServices.Settings.Current.IsDarkMode;
+
+            if (isDark)
+            {
+                // 🌙 მუქი თემა
+                this.BackColor = System.Drawing.Color.FromArgb(30, 30, 30);
+                foreach (Control ctrl in this.Controls)
+                {
+                    if (ctrl is GroupBox || ctrl is Panel)
+                    {
+                        ctrl.BackColor = System.Drawing.Color.FromArgb(45, 45, 48);
+                        ctrl.ForeColor = System.Drawing.Color.White;
+                    }
+                    else if (ctrl is Label && ctrl.Name != "lblRoomStatus" && ctrl.Name != "lblLightStatus")
+                    {
+                        ctrl.ForeColor = System.Drawing.Color.White;
+                    }
+                    else if (ctrl is Button btn && btn != btnPersonDetected && btn != btnNoPerson)
+                    {
+                        btn.BackColor = System.Drawing.Color.FromArgb(63, 63, 70);
+                        btn.ForeColor = System.Drawing.Color.White;
+                    }
+                }
+                btnDarkMode.Text = "☀️ Light Mode";
+            }
+            else
+            {
+                // ☀️ ნათელი თემა
+                this.BackColor = System.Drawing.Color.FromArgb(236, 240, 241);
+                foreach (Control ctrl in this.Controls)
+                {
+                    if (ctrl is GroupBox || ctrl is Panel)
+                    {
+                        ctrl.BackColor = System.Drawing.Color.White;
+                        ctrl.ForeColor = System.Drawing.Color.Black;
+                    }
+                    else if (ctrl is Label && ctrl.Name != "lblRoomStatus" && ctrl.Name != "lblLightStatus")
+                    {
+                        ctrl.ForeColor = System.Drawing.Color.Black;
+                    }
+                    else if (ctrl is Button btn && btn != btnPersonDetected && btn != btnNoPerson)
+                    {
+                        btn.BackColor = System.Drawing.Color.FromArgb(52, 152, 219); // სტანდარტული ლურჯი
+                        btn.ForeColor = System.Drawing.Color.White;
+                    }
+                }
+                btnDarkMode.Text = "🌙 Dark Mode";
+            }
         }
     }
 }
