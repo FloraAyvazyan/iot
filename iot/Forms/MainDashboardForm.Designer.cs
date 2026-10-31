@@ -70,7 +70,7 @@
             groupBox1.Controls.Add(lblLightTitle);
             groupBox1.Controls.Add(lblRoomStatus);
             groupBox1.Controls.Add(lblOccupancyTitle);
-            groupBox1.Location = new Point(30, 30);
+            groupBox1.Location = new Point(30, 58);
             groupBox1.Margin = new Padding(4);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(4);

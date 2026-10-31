@@ -40,8 +40,8 @@ namespace iot.Forms
             lblLightTitle.Text = LanguageService.T("შუქი:", "Light:");
 
             // ღილაკები
-            btnPersonDetected.Text = LanguageService.T("ადამიანი დაფიქსირდა", "Person Detected");
-            btnNoPerson.Text = LanguageService.T("ადამიანი არ არის", "No Person");
+            btnPersonDetected.Text = LanguageService.T("ადამიანია", "Person Detected");
+            btnNoPerson.Text = LanguageService.T("ცარიელია", "No Person");
             btnSettings.Text = LanguageService.T("პარამეტრები", "Settings");
             btnHistory.Text = LanguageService.T("ისტორია", "History");
             btnLogs.Text = LanguageService.T("ლოგები", "Logs");
@@ -89,7 +89,7 @@ namespace iot.Forms
         {
             AppServices.Sensor.NoPersonDetected();
 
-            AppServices.History.Add("NoPerson", LanguageService.T("ადამიანი აღარ არის ოთახში", "Person left the room"), AppServices.Auth.CurrentUser?.Username);
+            AppServices.History.Add("NoPerson", LanguageService.T("ადამიანი მიატოვა ოთახი", "Person left the room"), AppServices.Auth.CurrentUser?.Username);
 
             int countdownSeconds = AppServices.Settings.Current.CountdownSeconds;
             if (countdownSeconds <= 0) countdownSeconds = 30;
@@ -138,11 +138,25 @@ namespace iot.Forms
             {
                 lblRoomStatus.Text = LanguageService.T("დაკავებულია", "Occupied");
                 lblRoomStatus.ForeColor = System.Drawing.Color.Green;
+
+                // ⬇️ როცა ადამიანია: მწვანე ღილაკი ინთება, წითელი ქრება
+                btnPersonDetected.BackColor = System.Drawing.Color.FromArgb(39, 174, 96); // მუქი მწვანე
+                btnPersonDetected.Font = new System.Drawing.Font(btnPersonDetected.Font, System.Drawing.FontStyle.Bold);
+
+                btnNoPerson.BackColor = System.Drawing.Color.FromArgb(189, 195, 199); // ნაცრისფერი
+                btnNoPerson.Font = new System.Drawing.Font(btnNoPerson.Font, System.Drawing.FontStyle.Regular);
             }
             else
             {
                 lblRoomStatus.Text = LanguageService.T("ცარიელია", "Empty");
                 lblRoomStatus.ForeColor = System.Drawing.Color.Red;
+
+                // ⬇️ როცა ცარიელია: წითელი ღილაკი ინთება, მწვანე ქრება
+                btnNoPerson.BackColor = System.Drawing.Color.FromArgb(192, 57, 43); // მუქი წითელი
+                btnNoPerson.Font = new System.Drawing.Font(btnNoPerson.Font, System.Drawing.FontStyle.Bold);
+
+                btnPersonDetected.BackColor = System.Drawing.Color.FromArgb(189, 195, 199); // ნაცრისფერი
+                btnPersonDetected.Font = new System.Drawing.Font(btnPersonDetected.Font, System.Drawing.FontStyle.Regular);
             }
 
             // შუქის სტატუსი
