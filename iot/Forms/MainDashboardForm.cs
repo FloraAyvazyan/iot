@@ -25,6 +25,7 @@ namespace iot.Forms
             UpdateUI();
             ApplyTheme();
             uiTimer.Start();
+
         }
 
         // ⬇️ აი ეს მეთოდი აკლდა! ⬇️
@@ -80,7 +81,7 @@ namespace iot.Forms
             // NoPerson
             AppServices.History.Add("NoPerson", "", AppServices.Auth.CurrentUser?.Username);
 
-             AppServices.History.Add("LightOff", "", AppServices.Auth.CurrentUser?.Username);
+            AppServices.History.Add("LightOff", "", AppServices.Auth.CurrentUser?.Username);
 
             UpdateUI();
         }
@@ -267,6 +268,11 @@ namespace iot.Forms
                 }
                 btnDarkMode.Text = LanguageService.T("🌙 მუქი რეჟიმი", "🌙 Dark Mode");
             }
+        }
+
+        // ⬇️ ეს ივენთი უნდა იყოს მიბმული ფორმის Resize-ზე (Designer-ში)
+        private void MainDashboardForm_Resize(object sender, EventArgs e)
+        {
         }
     }
 }

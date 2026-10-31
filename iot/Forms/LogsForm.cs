@@ -55,6 +55,9 @@ namespace iot.Forms
             if (dgvLogs.Columns["Level"] != null) dgvLogs.Columns["Level"].HeaderText = LanguageService.T("დონე", "Level");
             if (dgvLogs.Columns["Category"] != null) dgvLogs.Columns["Category"].HeaderText = LanguageService.T("კატეგორია", "Category");
             if (dgvLogs.Columns["Username"] != null) dgvLogs.Columns["Username"].HeaderText = LanguageService.T("მომხმარებელი", "User");
+            dgvLogs.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvLogs.RowHeadersVisible = false;
+            dgvLogs.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         }
 
         private string TranslateLevel(string level)

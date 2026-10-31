@@ -38,17 +38,18 @@
             dgvLogs.AllowUserToAddRows = false;
             dgvLogs.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvLogs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvLogs.Location = new Point(20, 20);
+            dgvLogs.Location = new Point(20, 47);
             dgvLogs.Name = "dgvLogs";
             dgvLogs.ReadOnly = true;
             dgvLogs.RowHeadersWidth = 51;
-            dgvLogs.Size = new Size(640, 334);
+            dgvLogs.Size = new Size(722, 368);
             dgvLogs.TabIndex = 0;
             // 
             // btnClose
             // 
             btnClose.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnClose.Location = new Point(560, 361);
+            btnClose.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnClose.Location = new Point(642, 421);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(100, 30);
             btnClose.TabIndex = 1;
@@ -61,7 +62,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(682, 403);
+            ClientSize = new Size(767, 463);
             Controls.Add(btnClose);
             Controls.Add(dgvLogs);
             Name = "LogsForm";
