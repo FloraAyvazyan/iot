@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
-            label2 = new Label();
+            lblTitle = new Label();
+            lblCountdownTitle = new Label();
             numCountdown = new NumericUpDown();
             chkAutoMode = new CheckBox();
             chkNotifications = new CheckBox();
@@ -38,24 +38,25 @@
             ((System.ComponentModel.ISupportInitialize)numCountdown).BeginInit();
             SuspendLayout();
             // 
-            // label1
+            // lblTitle
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(30, 20);
-            label1.Name = "label1";
-            label1.Size = new Size(233, 31);
-            label1.TabIndex = 0;
-            label1.Text = "Application Settings";
+            lblTitle.AutoSize = true;
+            lblTitle.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTitle.Location = new Point(30, 20);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(233, 31);
+            lblTitle.TabIndex = 0;
+            lblTitle.Text = "Application Settings";
+            lblTitle.Click += label1_Click;
             // 
-            // label2
+            // lblCountdownTitle
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(30, 70);
-            label2.Name = "label2";
-            label2.Size = new Size(221, 23);
-            label2.TabIndex = 1;
-            label2.Text = "Countdown Time (seconds):";
+            lblCountdownTitle.AutoSize = true;
+            lblCountdownTitle.Location = new Point(30, 70);
+            lblCountdownTitle.Name = "lblCountdownTitle";
+            lblCountdownTitle.Size = new Size(221, 23);
+            lblCountdownTitle.TabIndex = 1;
+            lblCountdownTitle.Text = "Countdown Time (seconds):";
             // 
             // numCountdown
             // 
@@ -126,8 +127,8 @@
             Controls.Add(chkNotifications);
             Controls.Add(chkAutoMode);
             Controls.Add(numCountdown);
-            Controls.Add(label2);
-            Controls.Add(label1);
+            Controls.Add(lblCountdownTitle);
+            Controls.Add(lblTitle);
             Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
@@ -143,8 +144,8 @@
 
         #endregion
 
-        private Label label1;
-        private Label label2;
+        private Label lblTitle;
+        private Label lblCountdownTitle;
         private NumericUpDown numCountdown;
         private CheckBox chkAutoMode;
         private CheckBox chkNotifications;

@@ -187,6 +187,7 @@
             Name = "RegisterForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Smart Room - Register";
+            Load += RegisterForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

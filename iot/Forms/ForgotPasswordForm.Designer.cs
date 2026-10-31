@@ -107,6 +107,7 @@
             Name = "ForgotPasswordForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Forgot Password";
+            Load += ForgotPasswordForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using iot.Utilities;
+using iot.Services;
 
 namespace iot.Forms
 {
@@ -17,15 +18,47 @@ namespace iot.Forms
             AppServices.Countdown.OnTick += Countdown_OnTick;
             AppServices.Countdown.OnFinished += Countdown_OnFinished;
 
+            // ენის გამოყენება და ღილაკების (EN/GE) დამატება
+            ApplyLanguage();
+            LanguageUIHelper.AttachLanguageButtons(this, ApplyLanguage);
+
             UpdateUI();
-            ApplyTheme(); // ⬅️ ეს დაამატე, რომ პროგრამა გახსნისას თემა გაიხსენოს
+            ApplyTheme();
             uiTimer.Start();
+        }
+
+        // ⬇️ აი ეს მეთოდი აკლდა! ⬇️
+        private void ApplyLanguage()
+        {
+            this.Text = LanguageService.T("ჭკვიანი ოთახი - პანელი", "Smart Room - Dashboard");
+
+            // GroupBox-ის სათაური (შეცვალე groupBox1 შენი სახელით)
+            groupBox1.Text = LanguageService.T("ოთახის სტატუსი", "Room Status");
+
+            // სტატუსების სათაურები (შეცვალე lblOccupancyTitle და lblLightTitle შენი სახელებით)
+            lblOccupancyTitle.Text = LanguageService.T("დაკავებულობა:", "Occupancy:");
+            lblLightTitle.Text = LanguageService.T("შუქი:", "Light:");
+
+            // ღილაკები
+            btnPersonDetected.Text = LanguageService.T("ადამიანი დაფიქსირდა", "Person Detected");
+            btnNoPerson.Text = LanguageService.T("ადამიანი არ არის", "No Person");
+            btnSettings.Text = LanguageService.T("პარამეტრები", "Settings");
+            btnHistory.Text = LanguageService.T("ისტორია", "History");
+            btnLogs.Text = LanguageService.T("ლოგები", "Logs");
+            btnLogout.Text = LanguageService.T("გასვლა", "Logout");
+
+            if (btnDarkMode.Text.Contains("Dark") || btnDarkMode.Text.Contains("მუქი"))
+                btnDarkMode.Text = LanguageService.T("🌙 მუქი რეჟიმი", "🌙 Dark Mode");
+            else
+                btnDarkMode.Text = LanguageService.T("☀️ ნათელი რეჟიმი", "☀️ Light Mode");
+
+            UpdateUI(); // სტატუსების განახლება
         }
 
         // ტაიმერი: ყოველ წამს ახლდება დრო და Countdown
         private void uiTimer_Tick(object sender, EventArgs e)
         {
-            lblCurrentTime.Text = "Time: " + DateTime.Now.ToString("HH:mm:ss");
+            lblCurrentTime.Text = LanguageService.T("დრო: ", "Time: ") + DateTime.Now.ToString("HH:mm:ss");
 
             // თუ უკუთვლა აქტიურია, ვამცირებთ დროს
             if (AppServices.Countdown.IsActive)
@@ -34,45 +67,38 @@ namespace iot.Forms
             }
         }
 
-        // ღილაკი: ადამიანი დაფიქსირდა
         private void btnPersonDetected_Click(object sender, EventArgs e)
         {
-            // თუ უკუთვლა მიდიოდა, ვაჩერებთ
             AppServices.Countdown.StopCountdown();
-
-            // სენსორი: ადამიანია
             AppServices.Sensor.DetectPerson();
-
-            // შუქის ჩართვა
             AppServices.Light.TurnOnLight();
 
-            // ისტორიაში შენახვა
-            AppServices.History.Add("PersonDetected", "ადამიანი დაფიქსირდა ოთახში", AppServices.Auth.CurrentUser?.Username);
-            AppServices.History.Add("LightOn", "შუქი ჩაირთო", AppServices.Auth.CurrentUser?.Username);
+            // PersonDetected
+            AppServices.History.Add("PersonDetected", "", AppServices.Auth.CurrentUser?.Username);
+            AppServices.History.Add("LightOn", "", AppServices.Auth.CurrentUser?.Username);
+
+            // NoPerson
+            AppServices.History.Add("NoPerson", "", AppServices.Auth.CurrentUser?.Username);
+
+             AppServices.History.Add("LightOff", "", AppServices.Auth.CurrentUser?.Username);
 
             UpdateUI();
         }
 
-        // ღილაკი: ადამიანი აღარ არის (იწყება Countdown!)
         private void btnNoPerson_Click(object sender, EventArgs e)
         {
-            // სენსორი: ცარიელია
             AppServices.Sensor.NoPersonDetected();
 
-            // ისტორიაში შენახვა
-            AppServices.History.Add("NoPerson", "ადამიანი აღარ არის ოთახში", AppServices.Auth.CurrentUser?.Username);
+            AppServices.History.Add("NoPerson", LanguageService.T("ადამიანი აღარ არის ოთახში", "Person left the room"), AppServices.Auth.CurrentUser?.Username);
 
-            // ვიღებთ დროს settings-იდან (თუ არ არის, default 30 წამი)
             int countdownSeconds = AppServices.Settings.Current.CountdownSeconds;
             if (countdownSeconds <= 0) countdownSeconds = 30;
 
-            // ვიწყებთ უკუთვლას
             AppServices.Countdown.StartCountdown(countdownSeconds);
 
             UpdateUI();
         }
 
-        // Countdown-ის ივენთი: ყოველ წამს ახლდება ProgressBar
         private void Countdown_OnTick(int remainingSeconds, int totalSeconds)
         {
             if (InvokeRequired)
@@ -81,14 +107,12 @@ namespace iot.Forms
                 return;
             }
 
-            lblCountdown.Text = $"Countdown: {remainingSeconds}s";
+            lblCountdown.Text = LanguageService.T($"უკუთვლა: {remainingSeconds}წმ", $"Countdown: {remainingSeconds}s");
 
-            // ProgressBar-ის განახლება (0-100)
             progressBarCountdown.Maximum = totalSeconds;
             progressBarCountdown.Value = remainingSeconds;
         }
 
-        // Countdown-ის ივენთი: დრო ამოიწურა
         private void Countdown_OnFinished()
         {
             if (InvokeRequired)
@@ -97,11 +121,10 @@ namespace iot.Forms
                 return;
             }
 
-            // შუქის გამორთვა
             AppServices.Light.TurnOffLight();
-            AppServices.History.Add("LightOff", "უკუთვლის დასრულების შემდეგ შუქი გამოირთო", AppServices.Auth.CurrentUser?.Username);
+            AppServices.History.Add("LightOff", LanguageService.T("უკუთვლის დასრულების შემდეგ შუქი გამოირთო", "Light turned off after countdown"), AppServices.Auth.CurrentUser?.Username);
 
-            lblCountdown.Text = "Countdown: --";
+            lblCountdown.Text = LanguageService.T("უკუთვლა: --", "Countdown: --");
             progressBarCountdown.Value = 0;
 
             UpdateUI();
@@ -113,35 +136,34 @@ namespace iot.Forms
             // ოთახის სტატუსი
             if (AppServices.Sensor.IsPersonDetected)
             {
-                lblRoomStatus.Text = "Occupied";
+                lblRoomStatus.Text = LanguageService.T("დაკავებულია", "Occupied");
                 lblRoomStatus.ForeColor = System.Drawing.Color.Green;
             }
             else
             {
-                lblRoomStatus.Text = "Empty";
+                lblRoomStatus.Text = LanguageService.T("ცარიელია", "Empty");
                 lblRoomStatus.ForeColor = System.Drawing.Color.Red;
             }
 
             // შუქის სტატუსი
             if (AppServices.Light.IsLightOn)
             {
-                lblLightStatus.Text = "ON";
+                lblLightStatus.Text = LanguageService.T("ჩართულია", "ON");
                 lblLightStatus.ForeColor = System.Drawing.Color.Gold;
             }
             else
             {
-                lblLightStatus.Text = "OFF";
+                lblLightStatus.Text = LanguageService.T("გამორთულია", "OFF");
                 lblLightStatus.ForeColor = System.Drawing.Color.Gray;
             }
 
             // ბოლო დაფიქსირების დრო
             if (AppServices.Sensor.LastDetectionTime.HasValue)
             {
-                lblLastDetection.Text = "Last Detection: " + AppServices.Sensor.LastDetectionTime.Value.ToString("HH:mm:ss");
+                lblLastDetection.Text = LanguageService.T("ბოლო დაფიქსირება: ", "Last Detection: ") + AppServices.Sensor.LastDetectionTime.Value.ToString("HH:mm:ss");
             }
         }
 
-        // Logout ღილაკი
         private void btnLogout_Click(object sender, EventArgs e)
         {
             AppServices.Auth.Logout();
@@ -150,7 +172,6 @@ namespace iot.Forms
             this.Close();
         }
 
-        // ფორმის დახურვისას
         private void btnSettings_Click(object sender, EventArgs e)
         {
             var settingsForm = new SettingsForm();
@@ -168,6 +189,7 @@ namespace iot.Forms
             var logsForm = new LogsForm();
             logsForm.ShowDialog(this);
         }
+
         private void MainDashboardForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
@@ -175,12 +197,10 @@ namespace iot.Forms
 
         private void btnDarkMode_Click(object sender, EventArgs e)
         {
-            // ვაბრუნებთ პარამეტრს (თუ იყო true, გახდება false და პირიქით)
             var settings = AppServices.Settings.Current;
             settings.IsDarkMode = !settings.IsDarkMode;
             AppServices.Settings.Save(settings);
 
-            // ვიძახებთ თემის განახლების მეთოდს
             ApplyTheme();
         }
 
@@ -190,7 +210,6 @@ namespace iot.Forms
 
             if (isDark)
             {
-                // 🌙 მუქი თემა
                 this.BackColor = System.Drawing.Color.FromArgb(30, 30, 30);
                 foreach (Control ctrl in this.Controls)
                 {
@@ -209,11 +228,11 @@ namespace iot.Forms
                         btn.ForeColor = System.Drawing.Color.White;
                     }
                 }
-                btnDarkMode.Text = "☀️ Light Mode";
+                // ენის შენარჩუნება თემის შეცვლისას
+                btnDarkMode.Text = LanguageService.T("☀️ ნათელი რეჟიმი", "☀️ Light Mode");
             }
             else
             {
-                // ☀️ ნათელი თემა
                 this.BackColor = System.Drawing.Color.FromArgb(236, 240, 241);
                 foreach (Control ctrl in this.Controls)
                 {
@@ -228,11 +247,11 @@ namespace iot.Forms
                     }
                     else if (ctrl is Button btn && btn != btnPersonDetected && btn != btnNoPerson)
                     {
-                        btn.BackColor = System.Drawing.Color.FromArgb(52, 152, 219); // სტანდარტული ლურჯი
+                        btn.BackColor = System.Drawing.Color.FromArgb(52, 152, 219);
                         btn.ForeColor = System.Drawing.Color.White;
                     }
                 }
-                btnDarkMode.Text = "🌙 Dark Mode";
+                btnDarkMode.Text = LanguageService.T("🌙 მუქი რეჟიმი", "🌙 Dark Mode");
             }
         }
     }

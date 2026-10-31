@@ -1,10 +1,13 @@
-﻿using System;
+﻿using iot.Models;
+using iot.Utilities;
+using SmartRoomMonitor.Models;
+using SmartRoomMonitor.Services;
+using SmartRoomMonitor.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using SmartRoomMonitor.Models;
-using SmartRoomMonitor.Utilities;
 
-namespace SmartRoomMonitor.Services
+namespace iot.Services
 {
     public class HistoryService
     {
@@ -12,7 +15,6 @@ namespace SmartRoomMonitor.Services
         private readonly List<HistoryRecord> _records;
         private const int MaxRecords = 5000;
 
-        // სტანდარტული EventType-ების კონსტანტები — ერთი ადგილიდან ვმართავთ
         public const string EventLogin = "Login";
         public const string EventLogout = "Logout";
         public const string EventPersonDetected = "PersonDetected";
@@ -46,9 +48,9 @@ namespace SmartRoomMonitor.Services
 
                 _json.Write(PathHelper.HistoryFile, _records);
             }
-            catch
+            catch (Exception ex)
             {
-                // History ჩაწერის შეცდომა არ უნდა ამტვრიოს UI-ს
+                Console.WriteLine($"History Add Error: {ex.Message}");
             }
         }
 

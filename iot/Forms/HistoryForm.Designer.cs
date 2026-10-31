@@ -39,17 +39,17 @@
             dgvHistory.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvHistory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvHistory.Location = new Point(20, 20);
+            dgvHistory.Location = new Point(20, 47);
             dgvHistory.Name = "dgvHistory";
             dgvHistory.ReadOnly = true;
             dgvHistory.RowHeadersWidth = 51;
-            dgvHistory.Size = new Size(640, 350);
+            dgvHistory.Size = new Size(722, 368);
             dgvHistory.TabIndex = 0;
             // 
             // btnClose
             // 
             btnClose.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnClose.Location = new Point(560, 380);
+            btnClose.Location = new Point(642, 421);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(100, 30);
             btnClose.TabIndex = 1;

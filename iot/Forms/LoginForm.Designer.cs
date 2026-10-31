@@ -46,29 +46,28 @@
             lblTitle.BackColor = Color.White;
             lblTitle.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitle.ForeColor = Color.FromArgb(44, 62, 80);
-            lblTitle.Location = new Point(30, 30);
+            lblTitle.Location = new Point(30, 62);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(360, 40);
             lblTitle.TabIndex = 0;
             lblTitle.Text = "Smart Room Monitor";
             lblTitle.TextAlign = ContentAlignment.MiddleCenter;
-            //lblTitle.Click += lblTitle_Click;
+            lblTitle.Click += lblTitle_Click;
             // 
             // lblSubtitle
             // 
             lblSubtitle.ForeColor = Color.FromArgb(127, 140, 141);
-            lblSubtitle.Location = new Point(30, 75);
+            lblSubtitle.Location = new Point(30, 120);
             lblSubtitle.Name = "lblSubtitle";
             lblSubtitle.Size = new Size(360, 25);
             lblSubtitle.TabIndex = 1;
             lblSubtitle.Text = "გთხოვთ გაიაროთ ავტორიზაცია";
             lblSubtitle.TextAlign = ContentAlignment.MiddleCenter;
-            //lblSubtitle.Click += label1_Click_2;
             // 
             // lblUsername
             // 
             lblUsername.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblUsername.Location = new Point(50, 130);
+            lblUsername.Location = new Point(50, 179);
             lblUsername.Name = "lblUsername";
             lblUsername.Size = new Size(100, 25);
             lblUsername.TabIndex = 2;
@@ -77,7 +76,7 @@
             // txtUsername
             // 
             txtUsername.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtUsername.Location = new Point(50, 160);
+            txtUsername.Location = new Point(50, 207);
             txtUsername.Name = "txtUsername";
             txtUsername.Size = new Size(320, 31);
             txtUsername.TabIndex = 3;
@@ -85,7 +84,7 @@
             // lblPassword
             // 
             lblPassword.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblPassword.Location = new Point(50, 205);
+            lblPassword.Location = new Point(50, 241);
             lblPassword.Name = "lblPassword";
             lblPassword.Size = new Size(100, 25);
             lblPassword.TabIndex = 4;
@@ -94,7 +93,7 @@
             // txtPassword
             // 
             txtPassword.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtPassword.Location = new Point(50, 235);
+            txtPassword.Location = new Point(50, 269);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
             txtPassword.Size = new Size(320, 31);
@@ -103,7 +102,7 @@
             // chkRemember
             // 
             chkRemember.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            chkRemember.Location = new Point(50, 275);
+            chkRemember.Location = new Point(50, 306);
             chkRemember.Name = "chkRemember";
             chkRemember.Size = new Size(200, 25);
             chkRemember.TabIndex = 6;
@@ -117,7 +116,7 @@
             btnLogin.FlatStyle = FlatStyle.Flat;
             btnLogin.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnLogin.ForeColor = Color.White;
-            btnLogin.Location = new Point(50, 315);
+            btnLogin.Location = new Point(50, 337);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(320, 40);
             btnLogin.TabIndex = 7;
@@ -131,7 +130,7 @@
             btnRegister.Cursor = Cursors.Hand;
             btnRegister.FlatStyle = FlatStyle.Flat;
             btnRegister.ForeColor = Color.White;
-            btnRegister.Location = new Point(50, 365);
+            btnRegister.Location = new Point(50, 383);
             btnRegister.Name = "btnRegister";
             btnRegister.Size = new Size(155, 35);
             btnRegister.TabIndex = 8;
@@ -145,7 +144,7 @@
             btnForgotPassword.Cursor = Cursors.Hand;
             btnForgotPassword.FlatStyle = FlatStyle.Flat;
             btnForgotPassword.ForeColor = Color.White;
-            btnForgotPassword.Location = new Point(215, 365);
+            btnForgotPassword.Location = new Point(215, 383);
             btnForgotPassword.Name = "btnForgotPassword";
             btnForgotPassword.Size = new Size(155, 35);
             btnForgotPassword.TabIndex = 9;
@@ -157,7 +156,7 @@
             // 
             lblError.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblError.ForeColor = Color.FromArgb(231, 76, 60);
-            lblError.Location = new Point(50, 410);
+            lblError.Location = new Point(50, 433);
             lblError.Name = "lblError";
             lblError.Size = new Size(320, 30);
             lblError.TabIndex = 10;
@@ -168,7 +167,7 @@
             AutoScaleDimensions = new SizeF(9F, 23F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(402, 433);
+            ClientSize = new Size(402, 472);
             Controls.Add(lblError);
             Controls.Add(btnForgotPassword);
             Controls.Add(btnRegister);

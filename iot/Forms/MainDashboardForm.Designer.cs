@@ -36,9 +36,9 @@
             lblCurrentTime = new Label();
             lblLastDetection = new Label();
             lblLightStatus = new Label();
-            label2 = new Label();
+            lblLightTitle = new Label();
             lblRoomStatus = new Label();
-            label1 = new Label();
+            lblOccupancyTitle = new Label();
             btnPersonDetected = new Button();
             btnNoPerson = new Button();
             uiTimer = new System.Windows.Forms.Timer(components);
@@ -67,9 +67,9 @@
             groupBox1.Controls.Add(lblCurrentTime);
             groupBox1.Controls.Add(lblLastDetection);
             groupBox1.Controls.Add(lblLightStatus);
-            groupBox1.Controls.Add(label2);
+            groupBox1.Controls.Add(lblLightTitle);
             groupBox1.Controls.Add(lblRoomStatus);
-            groupBox1.Controls.Add(label1);
+            groupBox1.Controls.Add(lblOccupancyTitle);
             groupBox1.Location = new Point(30, 30);
             groupBox1.Margin = new Padding(4);
             groupBox1.Name = "groupBox1";
@@ -125,15 +125,15 @@
             lblLightStatus.TabIndex = 3;
             lblLightStatus.Text = "OFF";
             // 
-            // label2
+            // lblLightTitle
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(20, 80);
-            label2.Name = "label2";
-            label2.Size = new Size(60, 25);
-            label2.TabIndex = 2;
-            label2.Text = "Light:";
+            lblLightTitle.AutoSize = true;
+            lblLightTitle.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblLightTitle.Location = new Point(20, 80);
+            lblLightTitle.Name = "lblLightTitle";
+            lblLightTitle.Size = new Size(60, 25);
+            lblLightTitle.TabIndex = 2;
+            lblLightTitle.Text = "Light:";
             // 
             // lblRoomStatus
             // 
@@ -146,15 +146,15 @@
             lblRoomStatus.TabIndex = 1;
             lblRoomStatus.Text = "Empty";
             // 
-            // label1
+            // lblOccupancyTitle
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(20, 40);
-            label1.Name = "label1";
-            label1.Size = new Size(111, 25);
-            label1.TabIndex = 0;
-            label1.Text = "Occupancy:";
+            lblOccupancyTitle.AutoSize = true;
+            lblOccupancyTitle.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblOccupancyTitle.Location = new Point(20, 40);
+            lblOccupancyTitle.Name = "lblOccupancyTitle";
+            lblOccupancyTitle.Size = new Size(111, 25);
+            lblOccupancyTitle.TabIndex = 0;
+            lblOccupancyTitle.Text = "Occupancy:";
             // 
             // btnPersonDetected
             // 
@@ -278,9 +278,9 @@
         private GroupBox groupBox1;
         private Label lblLastDetection;
         private Label lblLightStatus;
-        private Label label2;
+        private Label lblLightTitle;
         private Label lblRoomStatus;
-        private Label label1;
+        private Label lblOccupancyTitle;
         private Label lblCurrentTime;
         private Button btnPersonDetected;
         private Button btnNoPerson;

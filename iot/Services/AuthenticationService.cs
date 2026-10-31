@@ -128,9 +128,7 @@ namespace iot.Services
             CurrentUser = user;
 
             _logger.LogInfo($"მომხმარებელი წარმატებით შევიდა სისტემაში: {username}", "Auth", username);
-            _history.Add(HistoryService.EventLogin, $"მომხმარებელი {username} შევიდა სისტემაში", username);
-
-            return true;
+            _history.Add(HistoryService.EventLogin, "", username); return true;
         }
 
         // --- გასვლა ---
@@ -139,7 +137,7 @@ namespace iot.Services
             if (CurrentUser != null)
             {
                 _logger.LogInfo($"მომხმარებელი გავიდა სისტემიდან: {CurrentUser.Username}", "Auth", CurrentUser.Username);
-                _history.Add(HistoryService.EventLogout, $"მომხმარებელი {CurrentUser.Username} გავიდა სისტემიდან", CurrentUser.Username);
+                _history.Add(HistoryService.EventLogout, "", CurrentUser.Username);
                 CurrentUser = null;
             }
         }

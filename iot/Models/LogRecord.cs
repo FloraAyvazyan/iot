@@ -1,6 +1,7 @@
 ﻿using System;
 
-namespace SmartRoomMonitor.Models
+namespace iot.Models  
+
 {
     public class LogRecord
     {
